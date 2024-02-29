@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SUPERMARKET</title>
+    <title>HotelAlerte</title>
 
     
 </head>
@@ -20,7 +20,7 @@
           margin: 0;
           padding: 0;
           font-family: 'Arial', sans-serif;
-          background: url('supermarket_bg.jpg') no-repeat center center fixed;
+          background: url('piscine-sunset.jpg') no-repeat center center fixed;
           background-size: cover;
           height: 100vh;
           display: flex;
@@ -87,7 +87,7 @@
             @endif
 
             <br><hr>
-        <h4>Bienvenue au Supermarché</h4>
+        <h3>Hôtel_Alerte</h3>
         <p class="login-message">Veuillez vous connecter pour accéder à votre compte.</p>
         <form method="post" action="{{ route('handleLogin') }}">
 

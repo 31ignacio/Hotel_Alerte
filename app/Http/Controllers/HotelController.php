@@ -20,6 +20,12 @@ class HotelController extends Controller
 
         //dd($request);
         try {
+
+            $user->name = $request->nom;
+            $user->email = $request->email;
+            $user->password =Hash::make($request->mdp);
+            $user->save();
+            //dd($user);
             $hotel->pays = $request->pays;
             $hotel->nom = $request->nom;
             $hotel->telephone = $request->telephone;
@@ -27,14 +33,11 @@ class HotelController extends Controller
             $hotel->adresse = $request->adresse;
             $hotel->ifu = $request->ifu;
             $hotel->responsable=$request->responsable;
+            $hotel->user_id=$user->id;
 
             $hotel->save();
 
-            $user->name = $request->nom;
-            $user->email = $request->email;
-            $user->password =Hash::make($request->password);
-            $user->save();
-
+           
             return redirect()->route('hotel.accueil')->with('success_message', 'Votre inscription à été enregistré avec succès');
 
             // if($request->mdf != $request->cfmdp){

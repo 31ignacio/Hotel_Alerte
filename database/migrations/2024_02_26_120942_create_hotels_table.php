@@ -21,6 +21,8 @@ return new class extends Migration
             $table->text('ifu');
             $table->integer('telephone');
             $table->text('photo')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
 
             $table->timestamps();

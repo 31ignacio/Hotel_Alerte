@@ -111,7 +111,7 @@
                         </form>
                         
                     </div>
-                    <button id="connexion-btn" class="bk-btn btn btn-secondary mt-5">CONNEXION</button>
+                    <a href="{{route('login')}}" id="connexion-btn" class="bk-btn btn btn-secondary mt-5">CONNEXION</a>
 
                     <button id="inscription-btn" class="bk-btn btn btn-secondary mt-5">INSCRIPTION</button>
                 </div>
