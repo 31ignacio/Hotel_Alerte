@@ -7,6 +7,7 @@ use App\Http\Requests\AuthRequest;
 use App\Http\Requests\createUsersRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session as FacadesSession;
 
 
 class AuthController extends Controller
@@ -37,5 +38,13 @@ class AuthController extends Controller
           return view('layouts.master', compact('user'));
   
       }
+
+      public function logout(){
+
+        FacadesSession::flush();
+        Auth::logout();
+
+        return redirect()->route('hotel.accueil');
+    }
     
 }

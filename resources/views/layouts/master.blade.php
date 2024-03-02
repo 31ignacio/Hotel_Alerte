@@ -66,29 +66,27 @@
                 <span>EN <i class="fa fa-angle-down"></i></span>
                 <div class="flag-dropdown">
                     <ul>
-                        <li><a href="#">Mon Profil</a></li>
-                        <li><a href="#">Déconnexion</a></li>
+                        <li><a href="{{route('hotel.profil')}}">Profil</a></li>
+                        <li><a href="{{route('logout')}}">Off</a></li>
                     </ul>
                 </div>
             </div>
-            <a href="#" class="bk-btn">Connexion</a>
-
-            <a href="#" class="bk-btn">Inscription</a>
+            <a href="{{route('client.create')}}" class="bk-btn">Signaler un client</a>
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">Accueil</a></li>
+                <li class="active"><a href="{{route('hotel.accueil')}}">Accueil</a></li>
                 <li><a href="./rooms.html">Rooms</a></li>
                 <li><a href="./about-us.html">About Us</a></li>
-                <li><a href="./pages.html">Pages</a>
+                <li><a href="./pages.html">Signalements</a>
                     <ul class="dropdown">
-                        <li><a href="./room-details.html">Room Details</a></li>
-                        <li><a href="#">Deluxe Room</a></li>
-                        <li><a href="#">Family Room</a></li>
-                        <li><a href="#">Premium Room</a></li>
+                        <li><a href="{{route('client.create')}}">Signaler un client</a></li>
+                        <li><a href="{{route('client.liste')}}">Liste des signalements</a></li>
+                        {{-- <li><a href="#">Family Room</a></li>
+                        <li><a href="#">Premium Room</a></li> --}}
                     </ul>
                 </li>
-                <li><a href="./blog.html">News</a></li>
+                <li><a href="{{route('client.create')}}">Signaler un client</a></li>
                 <li><a href="./contact.html">Contact</a></li>
             </ul>
         </nav>
@@ -100,8 +98,8 @@
             <a href="#"><i class="fa fa-instagram"></i></a>
         </div>
         <ul class="top-widget">
-            <li><i class="fa fa-phone"></i> (12) 345 67890</li>
-            <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
+            <li><i class="fa fa-phone"></i> (229) 40735335</li>
+            <li><i class="fa fa-envelope"></i> ahehehinnou31@gmail.com</li>
         </ul>
     </div>
     <!-- Offcanvas Menu Section End -->
@@ -119,27 +117,26 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="tn-right">
-                            {{-- <div class="top-social">
+                             <div class="top-social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-tripadvisor"></i></a>
                                 <a href="#"><i class="fa fa-instagram"></i></a>
-                            </div> --}}
-                            {{-- <a href="#" class="bk-btn btn-sm mt-1 mb-1">Connexion</a>
-                            <a href="{{route('hotelInscription')}}" class="bk-btn btn-sm ">Inscription</a> --}}
+                            </div> 
+                             <a href="{{route('client.create')}}" class="bk-btn btn-sm mt-1 mb-1">Signaler un client</a>
 
-                            {{-- <div class="language-option">
+                             <div class="language-option">
                                 <img src="img/flag.jpg" alt="">
                                 <span>EN <i class="fa fa-angle-down"></i></span>
                                 <div class="flag-dropdown">
                                     <ul>
-                                        <li><a href="#">Zi</a></li>
-                                        <li><a href="#">Fr</a></li>
+                                        <li><a href="{{route('hotel.profil')}}">Profil</a></li>
+                                        <li><a href="{{route('logout')}}">Off</a></li>
                                     </ul>
                                 </div>
-                            </div> --}}
+                            </div> 
 
-                            <div class="header-configure-area">
+                            {{-- <div class="header-configure-area">
                                 <div class="language-option">
                                     <img src="img/flag.jpg" alt="">
                                     <span>EN <i class="fa fa-angle-down"></i></span>
@@ -151,7 +148,7 @@
                                     </div>
                                 </div>
                                 
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -171,18 +168,18 @@
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
-                                    <li class="active"><a href="./index.html">Accueil</a></li>
+                                    <li class="active"><a href="{{route('hotel.accueil')}}">Accueil</a></li>
                                     <li><a href="./rooms.html">Rooms</a></li>
                                     <li><a href="./about-us.html">About Us</a></li>
-                                    <li><a href="./pages.html">Pages</a>
+                                    <li><a href="./pages.html">Signalements</a>
                                         <ul class="dropdown">
-                                            <li><a href="./room-details.html">Room Details</a></li>
-                                            <li><a href="./blog-details.html">Blog Details</a></li>
-                                            <li><a href="#">Family Room</a></li>
-                                            <li><a href="#">Premium Room</a></li>
+                                            <li><a href="{{route('client.create')}}">Signaler un client</a></li>
+                                            <li><a href="{{route('client.liste')}}">Liste des signalements</a></li>
+                                            {{-- <li><a href="#">Family Room</a></li>
+                                            <li><a href="#">Premium Room</a></li> --}}
                                         </ul>
                                     </li>
-                                    <li><a href="./blog.html">News</a></li>
+                                    <li><a href="{{route('client.create')}}">Signaler un client</a></li>
                                     <li><a href="./contact.html">Contact</a></li>
                                 </ul>
                             </nav>
