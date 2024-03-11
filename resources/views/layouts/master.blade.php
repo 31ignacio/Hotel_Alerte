@@ -61,6 +61,8 @@
         </div> --}}
 
         <div class="header-configure-area">
+            @if (Auth::check())
+
             <div class="language-option">
                 <img src="img/flag.jpg" alt="">
                 <span>EN <i class="fa fa-angle-down"></i></span>
@@ -71,13 +73,21 @@
                     </ul>
                 </div>
             </div>
-            <a href="{{route('client.create')}}" class="bk-btn">Signaler un client</a>
+            @endif
+            @if (Auth::check())
+            <a href="{{route('client.create')}}" class="bk-btn mt-1 mb-1">Signaler un client</a>
+            @else
+            <a href="{{route('login')}}" class="bk-btn mt-1 mb-1">Signaler un client</a>
+            @endif
+
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
                 <li class="active"><a href="{{route('hotel.accueil')}}">Accueil</a></li>
-                <li><a href="./rooms.html">Rooms</a></li>
-                <li><a href="./about-us.html">About Us</a></li>
+                <li><a href="">Menu</a></li>
+                <li><a href="">Menu2</a></li>
+                @if (Auth::check())
+
                 <li><a href="./pages.html">Signalements</a>
                     <ul class="dropdown">
                         <li><a href="{{route('client.create')}}">Signaler un client</a></li>
@@ -86,17 +96,18 @@
                         <li><a href="#">Premium Room</a></li> --}}
                     </ul>
                 </li>
-                <li><a href="{{route('client.create')}}">Signaler un client</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                @endif
+                {{-- <li><a href="{{route('client.create')}}">Signaler un client</a></li> --}}
+                <li><a href="{{route('hotel.contact')}}">Contact</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
-        <div class="top-social">
+        {{-- <div class="top-social">
             <a href="#"><i class="fa fa-facebook"></i></a>
             <a href="#"><i class="fa fa-twitter"></i></a>
             <a href="#"><i class="fa fa-tripadvisor"></i></a>
             <a href="#"><i class="fa fa-instagram"></i></a>
-        </div>
+        </div> --}}
         <ul class="top-widget">
             <li><i class="fa fa-phone"></i> (229) 40735335</li>
             <li><i class="fa fa-envelope"></i> ahehehinnou31@gmail.com</li>
@@ -117,13 +128,18 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="tn-right">
-                             <div class="top-social">
+                             {{-- <div class="top-social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-tripadvisor"></i></a>
                                 <a href="#"><i class="fa fa-instagram"></i></a>
-                            </div> 
-                             <a href="{{route('client.create')}}" class="bk-btn btn-sm mt-1 mb-1">Signaler un client</a>
+                            </div>  --}}
+                            @if (Auth::check())
+                            <a href="{{route('client.create')}}" class="bk-btn mt-1 mb-1">Signaler un client</a>
+                            @else
+                            <a href="{{route('login')}}" class="bk-btn mt-1 mb-1">Signaler un client</a>
+                            @endif
+                            @if (Auth::check())
 
                              <div class="language-option">
                                 <img src="img/flag.jpg" alt="">
@@ -135,6 +151,7 @@
                                     </ul>
                                 </div>
                             </div> 
+                            @endif
 
                             {{-- <div class="header-configure-area">
                                 <div class="language-option">
@@ -169,23 +186,26 @@
                             <nav class="mainmenu">
                                 <ul>
                                     <li class="active"><a href="{{route('hotel.accueil')}}">Accueil</a></li>
-                                    <li><a href="./rooms.html">Rooms</a></li>
-                                    <li><a href="./about-us.html">About Us</a></li>
+                                    <li><a href="">Menu</a></li>
+                                    <li><a href="">Menu2</a></li>
+                                    @if (Auth::check())
+
                                     <li><a href="./pages.html">Signalements</a>
                                         <ul class="dropdown">
-                                            <li><a href="{{route('client.create')}}">Signaler un client</a></li>
-                                            <li><a href="{{route('client.liste')}}">Liste des signalements</a></li>
+                                            <li><a href="{{route('client.create')}}">Signaler</a></li>
+                                            <li><a href="{{route('client.liste')}}">Signalements</a></li>
                                             {{-- <li><a href="#">Family Room</a></li>
                                             <li><a href="#">Premium Room</a></li> --}}
                                         </ul>
                                     </li>
-                                    <li><a href="{{route('client.create')}}">Signaler un client</a></li>
-                                    <li><a href="./contact.html">Contact</a></li>
+                                    @endif
+                                    {{-- <li><a href="{{route('client.create')}}">Signaler un client</a></li> --}}
+                                    <li><a href="{{route('hotel.contact')}}">Contact</a></li>
                                 </ul>
                             </nav>
-                            <div class="nav-right search-switch">
+                            {{-- <div class="nav-right search-switch">
                                 <i class="icon_search"></i>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -205,64 +225,23 @@
     
     <!-- Footer Section Begin -->
     <footer class="footer-section">
-      <div class="container">
-          <div class="footer-text">
-              <div class="row">
-                  <div class="col-lg-4">
-                      <div class="ft-about">
-                          <div class="logo">
-                              <a href="#">
-                                  <img src="img/footer-logo.png" alt="">
-                              </a>
-                          </div>
-                          <p>We inspire and reach millions of travelers<br /> across 90 local websites</p>
-                          <div class="fa-social">
-                              <a href="#"><i class="fa fa-facebook"></i></a>
-                              <a href="#"><i class="fa fa-twitter"></i></a>
-                              <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                              <a href="#"><i class="fa fa-instagram"></i></a>
-                              <a href="#"><i class="fa fa-youtube-play"></i></a>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-lg-3 offset-lg-1">
-                      <div class="ft-contact">
-                          <h6>Contact Us</h6>
-                          <ul>
-                              <li>(12) 345 67890</li>
-                              <li>info.colorlib@gmail.com</li>
-                              <li>856 Cordia Extension Apt. 356, Lake, United State</li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-lg-3 offset-lg-1">
-                      <div class="ft-newslatter">
-                          <h6>New latest</h6>
-                          <p>Get the latest updates and offers.</p>
-                          <form action="#" class="fn-form">
-                              <input type="text" placeholder="Email">
-                              <button type="submit"><i class="fa fa-send"></i></button>
-                          </form>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+    
       <div class="copyright-option">
           <div class="container">
               <div class="row">
                   <div class="col-lg-7">
                       <ul>
-                          <li><a href="#">Contact</a></li>
-                          <li><a href="#">Terms of use</a></li>
-                          <li><a href="#">Privacy</a></li>
-                          <li><a href="#">Environmental Policy</a></li>
+                          <li><a href="{{route('hotel.contact')}}">Contact</a></li>
+                          <li><a href="{{route('client.create')}}">Signaler client</a></li>
+                          <li><a href="{{route('client.liste')}}">Liste signalement</a></li>
                       </ul>
                   </div>
                   <div class="col-lg-5">
-                      <div class="co-text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
+                      <div class="co-text">
+                            <p>
+                                <p style="font-size: 12px;"> Copyright © <script>document.write(new Date().getFullYear())</script> Tous droits réservés | Hôtel Alerte - Votre sécurité est notre priorité</p>
+                            </p>
+                        </div>
                   </div>
               </div>
           </div>
@@ -271,14 +250,14 @@
   <!-- Footer Section End -->
 
   <!-- Search model Begin -->
-  <div class="search-model">
+  {{-- <div class="search-model">
       <div class="h-100 d-flex align-items-center justify-content-center">
           <div class="search-close-switch"><i class="icon_close"></i></div>
           <form class="search-model-form">
               <input type="text" id="search-input" placeholder="Search here.....">
           </form>
       </div>
-  </div>
+  </div> --}}
   <!-- Search model end -->
 
   <!-- Js Plugins -->

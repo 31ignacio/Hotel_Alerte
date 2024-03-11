@@ -162,11 +162,14 @@
                    
                     <div class="container">
                         <div class="row">
-                            @foreach($clients->chunk(2) as $chunk)
+                            @foreach($clients->chunk(1) as $chunk)
                             <div class="col-md-6">
                                 @foreach($chunk as $client)
                                 <div class="card mb-3">
-                                    <img src="{{ $client->photo }}" class="card-img-top" alt="{{ $client->nom }}">
+                                    {{-- <img src="{{ $client->photo }}" class="card-img-top" alt="{{ $client->nom }}"> --}}
+                                    {{-- <img src="avatar5.png" class="card-img-top" alt="{{ $client->nom }}"> --}}
+                                    <img src="{{ asset('images/' . $client->photo) }}" class="card-img-top client-photo" alt="{{ $client->nom }}">
+
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $client->nom }}</h5>
                                         <p class="card-text">Téléphone: {{ $client->telephone }}</p>
@@ -179,7 +182,7 @@
                                             <button type="button" class="btn btn-sm btn-info mr-1" data-toggle="modal" data-target="#detailModal{{ $client->id }}">Détail</button>
                                             <button type="button" class="btn btn-sm btn-success mr-1">Valider</button>
                                             <button type="button" class="btn btn-sm btn-warning mr-1" data-toggle="modal" data-target="#modifierModal{{ $client->id }}">Modifier</button>
-                                            <button type="button" class="btn btn-sm btn-danger">Annuler</button>
+                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#confirmationModal{{ $client->id }}">Annuler</button>
                                         </div>
                                     </div>
                                 </div>
@@ -289,6 +292,41 @@
                                         </div>
                                     </div>
                                 <!-- Fin Modal pour la modification des signalements-->
+
+                                <!-- Modal pour la confirmation de suppression -->
+                                    <div class="modal fade" id="confirmationModal{{ $client->id }}" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel{{ $client->id }}" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="confirmationModalLabel{{ $client->id }}">Confirmation</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Êtes-vous sûr de vouloir annuler ce signalement ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                                                    <form method="post" action="{{ route('client.destroy', ['client' => $client->id]) }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Oui</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- Fin Modal pour la confirmation de suppression -->
+                                {{-- style pour les photo --}}
+                                    <style>
+                                        .client-photo {
+                                        width: 500px;
+                                        height: 200px;
+                                        object-fit: cover;
+                                    }
+
+                                    </style>
 
                                 @endforeach
                             </div>

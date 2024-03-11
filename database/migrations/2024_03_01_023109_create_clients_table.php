@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('dateArriver');
             $table->date('dateDepart');
             $table->text('pays');
+            $table->text('photo')->nullable();
 
             $table->unsignedBigInteger('hotel_id');
             $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');

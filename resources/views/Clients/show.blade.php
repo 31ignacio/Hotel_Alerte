@@ -8,23 +8,31 @@
 
             <h3 class="text-center mb-3">Détails du signalement</h3>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <h5 class="card-title bg-secondary text-white">Informations du client</h5>
-
                     <div class="card">
                         <div class="card-body">
-                            <p class="card-text">Nom: {{ $client->nom }}</p>
-                            <p class="card-text">Signalé le: {{ \Carbon\Carbon::parse($client->created_at)->format('j/m/Y') }}</p>
-                            <p class="card-text">Nationalité: {{ $client->pays }}</p>
-                            <p class="card-text">Téléphone: {{ $client->telephone }}</p>
-                            <p class="card-text">Période: {{ \Carbon\Carbon::parse($client->dateArriver)->format('j/m/Y') }} au {{ \Carbon\Carbon::parse($client->dateDepart)->format('j/m/Y') }}</p>
-                            <h5>Description :</h5>
-                            <p class="card-text description">{{ $client->description }}</p>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <img src="{{ asset('images/' . $client->photo) }}" class="card-img-top client-photo" alt="{{ $client->nom }}">
 
+                                    {{-- <img src="{{ $client->image }}" class="img-fluid" alt="{{ $client->nom }}"> --}}
+                                </div>
+                                <div class="col-md-7">
+                                    <p class="card-text">Nom: {{ $client->nom }}</p>
+                                    <p class="card-text">Signalé le: {{ \Carbon\Carbon::parse($client->created_at)->format('j/m/Y') }}</p>
+                                    <p class="card-text">Nationalité: {{ $client->pays }}</p>
+                                    <p class="card-text">Téléphone: {{ $client->telephone }}</p>
+                                    <p class="card-text">Période: {{ \Carbon\Carbon::parse($client->dateArriver)->format('j/m/Y') }} au {{ \Carbon\Carbon::parse($client->dateDepart)->format('j/m/Y') }}</p>
+                                    <h5>Description :</h5>
+                                    <p class="card-text description">{{ $client->description }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                
+                <div class="col-md-4">
                     <h5 class="card-title bg-secondary text-white">Informations de l'hôtel</h5>
 
                     <div class="card">

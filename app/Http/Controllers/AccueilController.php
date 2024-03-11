@@ -15,4 +15,10 @@ class AccueilController extends Controller
 
         return view('Accueil/index',compact('clients'));
     }
+
+    public function contact(){
+
+
+        return view('Accueil/contact');
+    }
 }

@@ -10,7 +10,7 @@ class Client extends Model
     use HasFactory;
     protected $guarded = [''];
 
-    protected $fillable = ['nom', 'pays', 'dateArriver', 'dateDepart', 'description', 'telephone'];
+    protected $fillable = ['nom', 'pays', 'dateArriver', 'dateDepart', 'description', 'telephone','photo'];
 
     public function hotel()
     {

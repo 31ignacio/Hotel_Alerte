@@ -75,7 +75,7 @@ class HotelController extends Controller
          ->get();
 
          // Paginer les résultats obtenus
-        $perPage = 4;
+        $perPage = 2;
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $currentPageItems = $clients->slice(($currentPage - 1) * $perPage, $perPage)->all();
 

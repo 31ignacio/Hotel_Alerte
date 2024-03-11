@@ -33,7 +33,7 @@
                         <div class="col-md-2"></div>
                     </div>
 
-                    <form method="POST" action="{{route('client.store')}}">
+                    <form method="POST" action="{{route('client.store')}}" enctype="multipart/form-data">
 
                         @csrf
 
@@ -41,13 +41,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="nomClient">Nom du client :</label>
-                                    <input type="text" class="form-control" id="nomClient" name="nom">
+                                    <input type="text" class="form-control" id="nomClient" name="nom" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="pays">Pays d'origine :</label>
-                                    <input type="text" class="form-control" id="pays" name="pays">
+                                    <input type="text" class="form-control" id="pays" name="pays" required>
                                 </div>
 
                             </div>
@@ -58,12 +58,15 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="telephone">Téléphone :</label>
-                                    <input type="text" class="form-control" id="telephone" name="telephone">
+                                    <input type="text" class="form-control" id="telephone" name="telephone" required>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
-
+                                <div class="form-group">
+                                    <label for="telephone">Image :</label>
+                                    <input type="file" class="form-control" id="image" name="image" required>
+                                </div>
                             </div>
 
                         </div>
@@ -73,14 +76,14 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="dateArriver">Date d'arrivée :</label>
-                                    <input type="date" class="form-control" id="dateArriver" name="dateArriver">
+                                    <input type="date" class="form-control" id="dateArriver" name="dateArriver" required>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="dateDepart">Date départ :</label>
-                                    <input type="date" class="form-control" id="dateDepart" name="dateDepart">
+                                    <input type="date" class="form-control" id="dateDepart" name="dateDepart" required>
                                 </div>
                             </div>
 
