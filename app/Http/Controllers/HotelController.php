@@ -120,6 +120,22 @@ class HotelController extends Controller
         //dd($client);
         try {
             $client->update($request->all());
+            $imageId = $request->input('image_id');
+            $client = Client::findOrFail($imageId);
+            
+                if ($request->hasFile('image')) {
+                    $newImage = $request->file('image');
+                    $imageName = time() . '.' . $newImage->getClientOriginalExtension();
+                    $newImage->move(public_path('images'), $imageName);
+                    
+                    // Mettre à jour le chemin de l'image dans la base de données
+                    $client->photo = $imageName;
+            
+                    // return redirect()->back()->with('success', 'Image updated successfully.');
+                }
+                //dd($client);
+                $client->save();
+    
             return back()->with('success_messagee', 'Informations modifiées avec succès');
         } catch (Exception $e) {
             dd($e);

@@ -134,10 +134,19 @@
                     /* pour conserver le rapport d'aspect de l'image */
 
                 }
+                /* POUR VOIR TOUT LES SIGNALEMENTS */
+                .centered-link {
+                    display: block;
+                    margin: 0 auto;
+                    text-align: center; /* Centrer le texte à l'intérieur de l'ancre */
+                    text-decoration: underline; /* Ajouter un soulignement */
+                    text-decoration-color: #dfa974; /* Couleur du soulignement */
+
+
+                }
                 
 
             </style>
-
 
         </div>
     </div>
@@ -176,7 +185,7 @@
 
 
 
-    
+    {{-- js pour les info de l'hotel --}}
 <script>
     $(document).ready(function() {
         // Fonction pour afficher le modal lorsque survolé
@@ -211,7 +220,7 @@
     });
 </script>
 
-
+{{--  le js pour la photo --}}
 <script>
     $(document).ready(function() {
         // Au survol de la photo

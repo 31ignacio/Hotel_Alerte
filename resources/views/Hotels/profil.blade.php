@@ -233,7 +233,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <!-- Formulaire de modification -->
-                                                    <form method="post" action="{{ route('signalement.update', ['client' => $client->id]) }}">
+                                                    <form method="post" action="{{ route('signalement.update', ['client' => $client->id]) }}" enctype="multipart/form-data">
 
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{ $client->id }}">
@@ -257,7 +257,14 @@
                                                                 <label for="telephone">Téléphone</label>
                                                                 <input type="text" class="form-control" id="telephone" name="telephone" value="{{ $client->telephone }}">
                                                             </div>
-                                                        
+
+                                                            <div class="form-group col-md-6">
+                                                                <label for="telephone">Téléphone</label>
+                                                                <input type="hidden" class="form-control" name="image_id" value="{{ $client->id }}">
+                                                                <input type="file" class="form-control" name="image">
+                                                            </div>
+
+                                                            
                                                         </div>
 
                                                         <div class="form-row">
