@@ -7,116 +7,45 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="hero-text">
-                        <h1>Hotel_Alerte</h1>
+                        <h1 style="font-size: 50px;">Hotel_Alerte</h1>
                         <p>"Un compagnon fiable pour gérer efficacement les incidents dans votre hôtel."</p>
                         {{-- <a href="#" class="primary-btn">Discover Now</a> --}}
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1" id="booking-form-container">
-                    <div class="row">
-                        <div class="col-md-2"></div>
-                        <div class="col-md-8">
-                            @if (Session::get('success_message'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    {{ Session::get('success_message') }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true" style="font-size: 30px;">&times;</span>
-                                    </button>
-                                </div>
-                            @endif
-                        </div>
-                        <div class="col-md-2"></div>
-                    </div>
 
-                    <div class="booking-form" style="display:none;">
-                        <h4>Inscrivez votre Hotel</h4><br>
-                        <form id="myForm" method="post" action="{{ route('hotel.store') }}" class="form">
-                            @csrf
-                            <fieldset id="step-1">
-                                {{-- <legend>Step 1: Check Dates</legend> --}}
-                                <div class="select-option">
-                                    <label for="pays" class="form-label">Pays</label>
-                                    <select id="pays" name="pays">
-                                        <option value="">Sélectionner un pays</option>
-
-                                        <option value="Benin">Bénin</option>
-                                        <option value="Togo">Togo</option>
-                                    </select>
-                                    <div id="paysError" class="invalid-feedback"></div>
-
-                                </div>
-
-                                <div class="">
-                                    <label for="nom">Hôtel</label>
-                                    <input type="text" class="form-control" id="nom" name="nom">
-                                    <div id="hotelError" class="invalid-feedback"></div>
-
-                                </div>
-                                <div class="">
-                                    <label for="telephone">Téléphone</label>
-                                    <input type="number" min=0 class="form-control" id="telephone" name="telephone">
-                                    <div id="telephoneError" class="invalid-feedback"></div>
-
-                                </div>
-                                <div class="">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email">
-                                    <div id="emailError" class="invalid-feedback"></div>
-                                </div>
-                                <button type="button" onclick="nextStep(1)" class="btn btn-sm">Suivant</button>
-                            </fieldset>
-
-                            <fieldset id="step-2" style="display:none;">
-                                {{-- <legend>Step 2: Select Guests</legend> --}}
-                                <div class="">
-                                    <label for="adresse">Adresse</label>
-                                    <input type="text" class="form-control" id="adresse" name="adresse">
-                                </div>
-
-                                <div class="">
-                                    <label for="ifu">Numero d'identification fiscale</label>
-                                    <input type="number" min="0" class="form-control" id="ifu" name="ifu">
-                                </div>
-
-                                <div class="">
-                                    <label for="responsable">Responsable</label>
-                                    <input type="text" class="form-control" id="responsable" name="responsable">
-                                </div>
-
-                                {{-- <div class="">
-                                    <label for="photo">Photo</label>
-                                    <input type="file" class="form-control" id="photo" name="photo">
-                                </div> --}}
-
-                                <button type="button" onclick="prevStep(2)">Précédent</button>
-                                <button type="button" onclick="nextStep(2)">Suivant</button>
-                            </fieldset>
-
-                            <fieldset id="step-3" style="display:none;">
-                                {{-- <legend>Step 3: Select Room</legend> --}}
-                                <div class="">
-                                    <label for="mdp">Mot de passe</label>
-                                    <input type="password" class="form-control" id="mdp" name="mdp">
-                                </div>
-
-                                <div class="">
-                                    <label for="cfmdp">Confirmer mot de passe</label>
-                                    <input type="password" class="form-control" id="cfmdp" name="cfmdp">
-                                </div>
-
-                                <button type="button" onclick="prevStep(3)">Précédent</button>
-                                <button type="submit">Envoyer</button>
-                            </fieldset>
-                        </form>
-
-                    </div>
+                    {{-- Inscription hotel  --}}
+                
                     @if (!Auth::check())
-                        <a href="{{ route('login') }}" id="connexion-btn"
-                            class="bk-btn btn btn-secondary mt-5">CONNEXION</a>
-
-                        <button id="inscription-btn" class="bk-btn btn btn-secondary mt-5">INSCRIPTION</button>
+                        <a href="{{ route('login') }}" class="bk-btn btn btn-primary btn-lg btn-block mt-5">Connexion</a>
+                
+                        <a href="{{ route('hotel.create') }}" class="bk-btn btn btn-secondary btn-lg btn-block mt-3">Inscription</a>
                     @endif
+                    
                 </div>
+
+                <style>
+                    .bk-btn {
+    border-radius: 20px;
+}
+
+.bk-btn.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.bk-btn.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #fff;
+}
+
+.bk-btn:hover {
+    opacity: 0.8;
+}
+
+                </style>
+                
             </div>
 
 
@@ -339,7 +268,11 @@
                                         <th>Hôtel:</th>
                                         <td>
                                             <a href="#" class="hotel-info" data-nom="{{ $client->hotel->nom }}"
-                                                data-description="{{ $client->hotel->description }}">{{ $client->hotel->nom }}</a>
+                                                data-pays="{{ $client->hotel->pays }}"
+                                                data-adresse="{{ $client->hotel->adresse }}"
+                                                data-telephone="{{ $client->hotel->telephone }}"
+                                                data-email="{{ $client->hotel->email }}"
+                                                data-description="{{ $client->description }}">{{ $client->hotel->nom }}</a>
                                         </td>
                                     </tr>
 
@@ -361,23 +294,32 @@
                     @endforeach
                 </div>
 
-                <!-- Modal -->
-                <div class="modal fade" id="hotelModal" tabindex="-1" role="dialog" aria-labelledby="hotelModalLabel"
-                    aria-hidden="true">
+                <!-- Modal pour afficher les informations de l'hôtel -->
+                <div class="modal fade" id="hotelInfoModal" tabindex="-1" role="dialog"
+                    aria-labelledby="hotelInfoModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="hotelModalLabel">Informations sur l'hôtel</h5>
+                                <h5 class="modal-title" id="hotelInfoModalLabel">Informations de l'hôtel</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body" id="hotelInfo">
-                                <!-- Les informations sur l'hôtel seront affichées ici -->
+                            <div class="modal-body">
+                                <p><strong>Nom :</strong> <span id="hotelNom"></span></p>
+                                <p><strong>Pays :</strong> <span id="hotelPays"></span></p>
+                                <p><strong>Adresse :</strong> <span id="hotelAdresse"></span></p>
+                                <p><strong>Téléphone :</strong> <span id="hotelTelephone" class="badge badge-info"></span>
+                                </p>
+                                <p><strong>Email :</strong> <span id="hotelEmail"></span></p>
+                                <p class="text-center"><strong>Description :</strong>
+                                <div id="hotelDescription" class="hotel-description"></div>
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
+
 
                 <!-- Modal -->
                 <div class="modal fade" id="clientModal" tabindex="-1" role="dialog"
@@ -420,22 +362,32 @@
                         /* pour conserver le rapport d'aspect de l'image */
 
                     }
+
                     /* POUR VOIR TOUT LES SIGNALEMENTS */
                     .centered-link {
                         display: block;
                         margin: 0 auto;
-                        text-align: center; /* Centrer le texte à l'intérieur de l'ancre */
-                        text-decoration: underline; /* Ajouter un soulignement */
-                        text-decoration-color: #dfa974; /* Couleur du soulignement */
+                        text-align: center;
+                        /* Centrer le texte à l'intérieur de l'ancre */
+                        text-decoration: underline;
+                        /* Ajouter un soulignement */
+                        text-decoration-color: #dfa974;
+                        /* Couleur du soulignement */
 
 
                     }
-                    
-
                 </style>
-
-                <a href="{{route('client.liste')}}" class="centered-link"><h5 style="color: #dfa974;"> Voir tout les signalements</h5></a>
-
+                @if (Auth::check())
+                    <a href="{{ route('client.liste') }}" class="centered-link ">
+                        <h5 style="color: #dfa974;"><span class="badge custom-badge"> Voir tout les signalements</span>
+                        </h5>
+                    </a>
+                @else
+                    <a href="{{ route('login') }}" class="centered-link ">
+                        <h5 style="color: #dfa974;"><span class="badge custom-badge"> Voir tout les signalements</span>
+                        </h5>
+                    </a>
+                @endif
             </div>
         </div>
 
@@ -572,27 +524,59 @@
                 <div class="accordion" id="faqAccordion">
                     <div class="accordion-item">
                         <div class="accordion-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne">
-                            Comment puis-je réserver une chambre ?
+                            Quels types d'incidents HotelAlert peut-il gérer ?
                             <span class="accordion-icon">&#43;</span>
                         </div>
                         <div id="collapseOne" class="accordion-body collapse" aria-labelledby="headingOne"
                             data-parent="#faqAccordion">
-                            <p>Vous pouvez réserver une chambre en ligne sur notre site Web ou en nous appelant directement
-                                au numéro indiqué sur notre page de contact.</p>
+                            <p>HotelAlert peut gérer une gamme d'incidents, notamment les vols de biens, les incendies,
+                                les actes de vandalisme, les comportements perturbateurs des clients, les urgences médicales
+                                et bien plus encore.</p>
                         </div>
                     </div>
 
                     <div class="accordion-item">
                         <div class="accordion-header" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo">
-                            Y a-t-il un service de navette depuis l'aéroport ?
+                            Comment puis-je signaler un incident avec HotelAlert ?
                             <span class="accordion-icon">&#43;</span>
                         </div>
                         <div id="collapseTwo" class="accordion-body collapse" aria-labelledby="headingTwo"
                             data-parent="#faqAccordion">
-                            <p>Oui, nous proposons un service de navette depuis et vers l'aéroport pour nos clients.
-                                Veuillez nous contacter à l'avance pour organiser le ramassage.</p>
+                            <p>Pour signaler un incident, connectez-vous à votre compte HotelAlert, remplissez le formulaire
+                                de signalement d'incident en fournissant autant de détails que possible, puis soumettez-le.
+                                L'équipe de gestion sera informée immédiatement et pourra prendre les mesures nécessaires.
+                            </p>
                         </div>
                     </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" id="headingOne" data-toggle="collapse" data-target="#collapse3">
+                            Quels sont les avantages d'utiliser HotelAlert pour la gestion des incidents ?
+                            <span class="accordion-icon">&#43;</span>
+                        </div>
+                        <div id="collapse3" class="accordion-body collapse" aria-labelledby="headingOne"
+                            data-parent="#faqAccordion">
+                            <p>HotelAlert permet une gestion proactive des incidents, réduisant ainsi les temps de réponse
+                                et améliorant la sécurité globale de l'établissement. En signalant rapidement les incidents,
+                                les hôtels peuvent minimiser les pertes financières et protéger la réputation de leur
+                                établissement.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" id="headingOne" data-toggle="collapse" data-target="#collapse4">
+                            HotelAlert est-il compatible avec les autres systèmes de gestion d'hôtel ?
+                            <span class="accordion-icon">&#43;</span>
+                        </div>
+                        <div id="collapse4" class="accordion-body collapse" aria-labelledby="headingOne"
+                            data-parent="#faqAccordion">
+                            <p>Oui, HotelAlert peut être intégré à d'autres systèmes de gestion d'hôtel pour une efficacité
+                                accrue.
+                                L'intégration permet un partage transparent des données et une meilleure coordination entre
+                                les différents départements de l'hôtel.</p>
+                        </div>
+                    </div>
+
 
                     <!-- Ajoutez plus de questions et de réponses ici -->
                 </div>
@@ -602,7 +586,21 @@
     </span>
     <!-- Fin mon FAQ -->
 
-        {{-- CSS FAQ --}}
+    {{-- CSS POUR la description qui s'affiche en bas du modal info hotel --}}
+    <style>
+        .hotel-description {
+            font-style: italic;
+            color: #888;
+        }
+
+        .custom-badge {
+            background-color: #dfa974;
+            /* Couleur personnalisée */
+            color: white;
+            /* Couleur du texte */
+        }
+    </style>
+    {{-- CSS FAQ --}}
     <style>
         .accordion-item {
             border: 1px solid #ddd;
@@ -634,70 +632,31 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-{{-- Le script qui affiche le formulaire d'inscription --}}
+{{-- Le js pour les info de l'hotel --}}
 <script>
     $(document).ready(function() {
-        $("#inscription-btn").click(function() {
-            $("#booking-form-container").find('.booking-form').show();
-            $(this).hide();
-            $("#connexion-btn").hide();
-
-        });
-    });
-</script>
-
-{{-- Le script qui permet de faire suivant et précédent pour inscription --}}
-<script>
-    function nextStep(step) {
-        var currentStep = document.getElementById('step-' + step);
-        var nextStep = document.getElementById('step-' + (step + 1));
-        currentStep.style.display = 'none';
-        nextStep.style.display = 'block';
-    }
-
-    function prevStep(step) {
-        var currentStep = document.getElementById('step-' + step);
-        var prevStep = document.getElementById('step-' + (step - 1));
-        currentStep.style.display = 'none';
-        prevStep.style.display = 'block';
-    }
-</script>
-
-<script>
-    $(document).ready(function() {
-        // Fonction pour afficher le modal lorsque survolé
-        function showHotelModal(nom, description) {
-            // Construire le contenu du modal
-            var modalContent = '<p>Nom: ' + nom + '</p>';
-            modalContent += '<p>Description: ' + description + '</p>';
-            // Ajouter d'autres informations selon vos besoins
-
-            // Injecter le contenu dans le modal
-            $('#hotelInfo').html(modalContent);
-
-            // Afficher le modal
-            $('#hotelModal').modal('show');
-        }
-
-        // Au survol du lien
-        $('.hotel-info').mouseenter(function() {
-            // Récupérer les informations de l'hôtel
+        $('.hotel-info').hover(function() {
             var nom = $(this).data('nom');
+            var pays = $(this).data('pays');
+            var adresse = $(this).data('adresse');
+            var telephone = $(this).data('telephone');
+            var email = $(this).data('email');
             var description = $(this).data('description');
 
-            // Afficher le modal
-            showHotelModal(nom, description);
-        });
+            $('#hotelNom').text(nom);
+            $('#hotelPays').text(pays);
+            $('#hotelAdresse').text(adresse);
+            $('#hotelTelephone').text(telephone);
+            $('#hotelEmail').text(email);
+            $('#hotelDescription').text(description);
 
-        // Lorsque le curseur quitte le contenu du modal
-        $('#hotelInfo').mouseleave(function() {
-            // Masquer le modal
-            $('#hotelModal').modal('hide');
+            $('#hotelInfoModal').modal('show');
+        }, function() {
+            $('#hotelInfoModal').modal('hide');
         });
     });
 </script>
-
-
+{{-- Le js pour la photo --}}
 <script>
     $(document).ready(function() {
         // Au survol de la photo

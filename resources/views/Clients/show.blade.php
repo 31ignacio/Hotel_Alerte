@@ -4,7 +4,7 @@
 @section('content')
     <section>
         <div class="container mt-2 mb-4">
-            <a href="{{route('hotel.accueil')}}" class="btn btn-sm btn-secondary" style="">Retour</a>
+            <a href="{{route('client.liste')}}" class="btn btn-sm btn-secondary">Retour</a>
 
             <h3 class="text-center mb-3">Détails du signalement</h3>
             <div class="row">
@@ -19,12 +19,12 @@
                                     {{-- <img src="{{ $client->image }}" class="img-fluid" alt="{{ $client->nom }}"> --}}
                                 </div>
                                 <div class="col-md-7">
-                                    <p class="card-text">Nom: {{ $client->nom }}</p>
-                                    <p class="card-text">Signalé le: {{ \Carbon\Carbon::parse($client->created_at)->format('j/m/Y') }}</p>
-                                    <p class="card-text">Nationalité: {{ $client->pays }}</p>
-                                    <p class="card-text">Téléphone: {{ $client->telephone }}</p>
-                                    <p class="card-text">Période: {{ \Carbon\Carbon::parse($client->dateArriver)->format('j/m/Y') }} au {{ \Carbon\Carbon::parse($client->dateDepart)->format('j/m/Y') }}</p>
-                                    <h5>Description :</h5>
+                                    <p class="card-text"><b>Nom: </b>{{ $client->nom }}</p>
+                                    <p class="card-text"><b>Signalé le: </b>{{ \Carbon\Carbon::parse($client->created_at)->format('j/m/Y') }}</p>
+                                    <p class="card-text"><b>Nationalité:</b> {{ $client->pays }}</p>
+                                    <p class="card-text"><b>Téléphone:</b> {{ $client->telephone }}</p>
+                                    <p class="card-text"><b>Période:</b> {{ \Carbon\Carbon::parse($client->dateArriver)->format('j/m/Y') }} au {{ \Carbon\Carbon::parse($client->dateDepart)->format('j/m/Y') }}</p>
+                                    <h5><b>Description :</b></h5>
                                     <p class="card-text description">{{ $client->description }}</p>
                                 </div>
                             </div>
@@ -37,16 +37,30 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <p class="card-text">Hôtel: {{ $client->hotel->nom }}</p>
-                            <p class="card-text">Pays: {{ $client->hotel->pays }}</p>
-                            <p class="card-text">Adresse: {{ $client->hotel->adresse }}</p>
+                            <p class="card-text"><b> Hôtel:</b> {{ $client->hotel->nom }}</p>
+                            <p class="card-text"><b>Pays:</b> {{ $client->hotel->pays }}</p>
+                            <p class="card-text"><b>Adresse:</b> {{ $client->hotel->adresse }}</p>
 
-                            <p class="card-text">Email: {{ $client->hotel->email }}</p>
+                            <p class="card-text"><b>Email:</b> {{ $client->hotel->email }}</p>
 
-                            <p class="card-text">Téléphone: {{ $client->hotel->telephone }}</p>
+                            <p class="card-text"><b>Téléphone:</b> {{ $client->hotel->telephone }}</p>
 
                         </div>
+                    </div><br>
+
+                    <div style="margin-bottom: 20px;">
+                        <button class="call-button btn btn-sm btn-info" onclick="window.location.href = 'tel:{{ $client->hotel->telephone }}';">
+                            <i class="fa fa-phone"></i> Appeler {{ $client->hotel->nom }}
+                        </button>
+                        <br><br>
+                        <a href="https://api.whatsapp.com/send?phone={{ $client->hotel->telephone }}" target="_blank"
+                            style="padding: 10px 20px; border-radius: 5px; text-decoration: none; display: inline-block;"
+                            class="btn btn-sm btn-success">
+                            <i class="fa fa-whatsapp"></i> Cliquez ici pour contacter l'hôtel ({{ $client->hotel->nom }}) via WhatsApp
+                        </a>
                     </div>
+                    
+    
                 </div>
             </div>
         </div>

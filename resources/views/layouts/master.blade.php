@@ -64,8 +64,8 @@
             @if (Auth::check())
 
             <div class="language-option">
-                <img src="img/flag.jpg" alt="">
-                <span>EN <i class="fa fa-angle-down"></i></span>
+                <img src="img/avatar5.png" alt="">
+                <span>Votre Profil<i class="fa fa-angle-down"></i></span>
                 <div class="flag-dropdown">
                     <ul>
                         <li><a href="{{route('hotel.profil')}}">Profil</a></li>
@@ -85,8 +85,9 @@
             <ul>
                 <li class="active"><a href="{{route('hotel.accueil')}}">Accueil</a></li>
                 <li><a href="">Menu</a></li>
-                <li><a href="">Menu2</a></li>
                 @if (Auth::check())
+
+                <li><a href="{{route('hotel.liste')}}">Hôtels</a></li>
 
                 <li><a href="./pages.html">Signalements</a>
                     <ul class="dropdown">
@@ -110,7 +111,7 @@
         </div> --}}
         <ul class="top-widget">
             <li><i class="fa fa-phone"></i> (229) 40735335</li>
-            <li><i class="fa fa-envelope"></i> ahehehinnou31@gmail.com</li>
+            <li><i class="fa fa-envelope"></i> ariExpertiz@gmail.com</li>
         </ul>
     </div>
     <!-- Offcanvas Menu Section End -->
@@ -123,7 +124,7 @@
                     <div class="col-lg-6">
                         <ul class="tn-left">
                             <li><i class="fa fa-phone"></i> (229) 40735335</li>
-                            <li><i class="fa fa-envelope"></i> ahehehinnou31@gmail.com</li>
+                            <li><i class="fa fa-envelope"></i> ariExperiz@gmail.com</li>
                         </ul>
                     </div>
                     <div class="col-lg-6">
@@ -142,8 +143,8 @@
                             @if (Auth::check())
 
                              <div class="language-option">
-                                <img src="img/flag.jpg" alt="">
-                                <span>EN <i class="fa fa-angle-down"></i></span>
+                                <img src="img/avatar5.png" alt="">
+                                <span>Votre Profil <i class="fa fa-angle-down"></i></span>
                                 <div class="flag-dropdown">
                                     <ul>
                                         <li><a href="{{route('hotel.profil')}}">Profil</a></li>
@@ -187,8 +188,9 @@
                                 <ul>
                                     <li class="active"><a href="{{route('hotel.accueil')}}">Accueil</a></li>
                                     <li><a href="">Menu</a></li>
-                                    <li><a href="">Menu2</a></li>
                                     @if (Auth::check())
+
+                                    <li><a href="{{route('hotel.liste')}}">Hôtels</a></li>
 
                                     <li><a href="./pages.html">Signalements</a>
                                         <ul class="dropdown">
@@ -230,11 +232,20 @@
           <div class="container">
               <div class="row">
                   <div class="col-lg-7">
+                    @if (Auth::check())
+
                       <ul>
                           <li><a href="{{route('hotel.contact')}}">Contact</a></li>
                           <li><a href="{{route('client.create')}}">Signaler client</a></li>
                           <li><a href="{{route('client.liste')}}">Liste signalement</a></li>
                       </ul>
+                    @else
+                        <ul>
+                            <li><a href="{{route('hotel.contact')}}">Contact</a></li>
+                            <li><a href="{{route('login')}}">Signaler client</a></li>
+                            <li><a href="{{route('login')}}">Liste signalement</a></li>
+                        </ul>
+                    @endif
                   </div>
                   <div class="col-lg-5">
                       <div class="co-text">
@@ -261,6 +272,7 @@
   <!-- Search model end -->
 
   <!-- Js Plugins -->
+  <script src="https://cdn.kkiapay.me/k.js"></script>
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/jquery.magnific-popup.min.js"></script>

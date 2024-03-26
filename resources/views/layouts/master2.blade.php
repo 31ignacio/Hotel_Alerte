@@ -44,7 +44,7 @@
                     <div class="col-lg-6">
                         <ul class="tn-left">
                             <li><i class="fa fa-phone"></i> (229) 40735335</li>
-                            <li><i class="fa fa-envelope"></i> ahehehinnou31@gmail.com</li>
+                            <li><i class="fa fa-envelope"></i> ariExpertiz@gmail.com</li>
                         </ul>
                     </div>
                     <div class="col-lg-6">
@@ -71,8 +71,8 @@
 
                             <div class="header-configure-area">
                                 <div class="language-option">
-                                    <img src="img/flag.jpg" alt="">
-                                    <span>EN <i class="fa fa-angle-down"></i></span>
+                                    <img src="img/avatar5.png" alt="">
+                                    <span>Votre Profil <i class="fa fa-angle-down"></i></span>
                                     <div class="flag-dropdown">
                                         <ul>
                                             <li><a href="{{route('hotel.profil')}}">Profil</a></li>
@@ -101,22 +101,32 @@
 
     <!-- Footer Section Begin -->
     <footer class="footer-section">
-        
+    
         <div class="copyright-option">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-7">
+                      @if (Auth::check())
+  
                         <ul>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Terms of use</a></li>
-                            <li><a href="#">Privacy</a></li>
-                            <li><a href="#">Environmental Policy</a></li>
+                            <li><a href="{{route('hotel.contact')}}">Contact</a></li>
+                            <li><a href="{{route('client.create')}}">Signaler client</a></li>
+                            <li><a href="{{route('client.liste')}}">Liste signalement</a></li>
                         </ul>
+                      @else
+                          <ul>
+                              <li><a href="{{route('hotel.contact')}}">Contact</a></li>
+                              <li><a href="{{route('login')}}">Signaler client</a></li>
+                              <li><a href="{{route('login')}}">Liste signalement</a></li>
+                          </ul>
+                      @endif
                     </div>
                     <div class="col-lg-5">
-                        <div class="co-text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                              Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
+                        <div class="co-text">
+                              <p>
+                                  <p style="font-size: 12px;"> Copyright © <script>document.write(new Date().getFullYear())</script> Tous droits réservés | Hôtel Alerte - Votre sécurité est notre priorité</p>
+                              </p>
+                          </div>
                     </div>
                 </div>
             </div>
@@ -137,6 +147,7 @@
   <!-- Search model end -->
 
   <!-- Js Plugins -->
+  <script src="https://cdn.kkiapay.me/k.js"></script>
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/jquery.magnific-popup.min.js"></script>

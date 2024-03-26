@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master2')
 
 @section('content')
 
@@ -6,7 +6,10 @@
     <div class="container">
         <div class="container">
             <div class="row">
+                <a href="{{route('hotel.accueil')}}" class="btn btn-sm btn-secondary">Retour</a>
+
                 <div class="col-md-12 text-center mb-3">
+
                     <h2>Description du signalement</h2>
                     <p>Remplissez le formulaire ci-dessous pour signaler un client.</p>
                 </div>
@@ -105,6 +108,9 @@
         </div>
         
     </div>
+
+
+    
 </section>
 <br><br>
 

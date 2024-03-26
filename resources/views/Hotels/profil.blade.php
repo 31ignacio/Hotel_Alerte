@@ -180,7 +180,7 @@
 
                                         <div class="d-flex justify-content-end">
                                             <button type="button" class="btn btn-sm btn-info mr-1" data-toggle="modal" data-target="#detailModal{{ $client->id }}">Détail</button>
-                                            <button type="button" class="btn btn-sm btn-success mr-1">Valider</button>
+                                            {{-- <button type="button" class="btn btn-sm btn-success mr-1">Valider</button> --}}
                                             <button type="button" class="btn btn-sm btn-warning mr-1" data-toggle="modal" data-target="#modifierModal{{ $client->id }}">Modifier</button>
                                             <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#confirmationModal{{ $client->id }}">Annuler</button>
                                         </div>
@@ -341,31 +341,9 @@
                         </div>
                         <br>
                         {{-- LA PAGINATION --}}
-                        <nav aria-label="Page navigation" class="mb-3">
-                            <ul class="pagination justify-content-center">
-                                @if ($clients->onFirstPage())
-                                    <li class="page-item disabled">
-                                        <span class="page-link" aria-hidden="true">&laquo; Précédent</span>
-                                    </li>
-                                @else
-                                    <li class="page-item">
-                                        <a class="page-link" href="{{ $clients->previousPageUrl() }}"
-                                            rel="prev" aria-label="Précédent">&laquo; Précédent</a>
-                                    </li>
-                                @endif
-
-                                @if ($clients->hasMorePages())
-                                    <li class="page-item">
-                                        <a class="page-link" href="{{ $clients->nextPageUrl() }}"
-                                            rel="next" aria-label="Suivant">Suivant &raquo;</a>
-                                    </li>
-                                @else
-                                    <li class="page-item disabled">
-                                        <span class="page-link" aria-hidden="true">Suivant &raquo;</span>
-                                    </li>
-                                @endif
-                            </ul>
-                        </nav>
+                        <div style="display: flex; justify-content: center;" class="mb-3 mt-3">
+                            {{$clients->links()}}
+                        </div>
                     </div>
                     
                     

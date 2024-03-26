@@ -8,29 +8,14 @@ use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\hotel;
-
+use Exception;
 
 class ClientController extends Controller
 {
     //
     public function index(){
 
-        $clients = Client::orderBy('created_at', 'desc')->get();
-
-
-        // Paginer les résultats obtenus
-        $perPage = 8;
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $currentPageItems = $clients->slice(($currentPage - 1) * $perPage, $perPage)->all();
-
-        // Créer une instance de LengthAwarePaginator
-        $clients = new LengthAwarePaginator(
-            $currentPageItems,
-            $clients->count(),
-            $perPage,
-            $currentPage,
-            ['path' => LengthAwarePaginator::resolveCurrentPath()]
-        );
+        $clients = Client::orderBy('created_at', 'desc')->paginate(4);
 
         return view('Clients/index',compact('clients'));
 
@@ -106,21 +91,21 @@ class ClientController extends Controller
         $query->orderBy('created_at', 'desc');
 
         // Exécuter la requête
-        $clients = $query->get();
+        $clients = $query->paginate(4);
 
-        // Paginer les résultats obtenus
-        $perPage = 8;
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $currentPageItems = $clients->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        // // Paginer les résultats obtenus
+        // $perPage = 8;
+        // $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        // $currentPageItems = $clients->slice(($currentPage - 1) * $perPage, $perPage)->all();
 
-        // Créer une instance de LengthAwarePaginator
-        $clients = new LengthAwarePaginator(
-            $currentPageItems,
-            $clients->count(),
-            $perPage,
-            $currentPage,
-            ['path' => LengthAwarePaginator::resolveCurrentPath()]
-        );
+        // // Créer une instance de LengthAwarePaginator
+        // $clients = new LengthAwarePaginator(
+        //     $currentPageItems,
+        //     $clients->count(),
+        //     $perPage,
+        //     $currentPage,
+        //     ['path' => LengthAwarePaginator::resolveCurrentPath()]
+        // );
         //return back()->with(compact('clients'));
         return view('Clients/index',compact('clients'));
 

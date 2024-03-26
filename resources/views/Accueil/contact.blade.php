@@ -34,16 +34,24 @@
                 </div>
             </div>
             <div class="col-lg-7 offset-lg-1">
-                <form action="#" class="contact-form">
+
+                @if(Session::has('msg'))
+                    <p class="alert alert-success">{{Session::get('msg')}}</p>
+
+                @endif
+
+                <form action="{{route('hotel.postMessage')}}" class="contact-form" id="contact-form" method="post">
+                    @csrf
+
                     <div class="row">
                         <div class="col-lg-6">
-                            <input type="text" placeholder="Votre nom">
+                            <input type="text" placeholder="Votre nom" name="name" required >
                         </div>
                         <div class="col-lg-6">
-                            <input type="email" placeholder="Votre Email">
+                            <input type="email" placeholder="Votre Email" name="email" required>
                         </div>
                         <div class="col-lg-12">
-                            <textarea placeholder="Votre Message"></textarea>
+                            <textarea placeholder="Votre Message" name="message" required></textarea>
                             <button type="submit">Envoyer</button>
                         </div>
                     </div>

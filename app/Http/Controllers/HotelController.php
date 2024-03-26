@@ -21,6 +21,21 @@ class HotelController extends Controller
         return view('Hotels/index');
     }
 
+
+    public function create(){
+
+
+        return view('Hotels/create');
+    }
+
+    public function listeHotel(){
+        $hotelsBenin = hotel::where('pays', 'Benin')->get();
+        $hotelsTogo = hotel::where('pays', 'Togo')->get();
+
+        //dd($hotelsBenin);
+        return view('Hotels/listeHotel',compact('hotelsBenin','hotelsTogo'));
+    }
+
     public function store(hotel $hotel, User $user, Request $request){
 
         //dd($request);
@@ -36,14 +51,14 @@ class HotelController extends Controller
             $hotel->telephone = $request->telephone;
             $hotel->email= $request->email;
             $hotel->adresse = $request->adresse;
-            $hotel->ifu = $request->ifu;
+            $hotel->ifu = 0000000000000;
             $hotel->responsable=$request->responsable;
             $hotel->user_id=$user->id;
 
             $hotel->save();
 
            
-            return redirect()->route('hotel.accueil')->with('success_message', 'Votre inscription à été enregistré avec succès');
+            return redirect()->route('hotel.create')->with('success_message', 'Votre inscription à été enregistré avec succès');
 
             // if($request->mdf != $request->cfmdp){
 
@@ -72,21 +87,21 @@ class HotelController extends Controller
          $hotels = hotel::where('user_id', $user->id)->first();
          $clients = Client::where('hotel_id', $hotel_id)
          ->orderBy('created_at', 'desc')
-         ->get();
+         ->paginate(2);
 
          // Paginer les résultats obtenus
-        $perPage = 2;
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $currentPageItems = $clients->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        // $perPage = 2;
+        // $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        // $currentPageItems = $clients->slice(($currentPage - 1) * $perPage, $perPage)->all();
 
-        // Créer une instance de LengthAwarePaginator
-        $clients = new LengthAwarePaginator(
-            $currentPageItems,
-            $clients->count(),
-            $perPage,
-            $currentPage,
-            ['path' => LengthAwarePaginator::resolveCurrentPath()]
-        );
+        // // Créer une instance de LengthAwarePaginator
+        // $clients = new LengthAwarePaginator(
+        //     $currentPageItems,
+        //     $clients->count(),
+        //     $perPage,
+        //     $currentPage,
+        //     ['path' => LengthAwarePaginator::resolveCurrentPath()]
+        // );
             
 
         return view('Hotels/profil',compact('hotels','clients'));

@@ -120,10 +120,15 @@
   
               <br>
             <button type="submit" class="login-button">Se connecter</button>
-        </form>
+        </form><br><br>
+
+        <div id="emailHelp" class="form-text text-center mb-5 text-dark">
+          Nouveau membre ? <a href="{{route('hotel.create')}}" class="text-dark fw-bold"><span class="badge badge-info">Créer mon compte</span> </a>
+         </div>
     </div>    
 
 
+    
     <script>
       function togglePasswordVisibility() {
           var passwordInput = document.getElementById('password');

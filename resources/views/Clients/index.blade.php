@@ -9,13 +9,19 @@
 
 
         <div class=" row">
-            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <a href="{{route('hotel.accueil')}}" class="btn btn-sm btn-secondary">Retour</a>
+
+            </div>
             <div class="col-md-8">
+
                 <form method="post" action="{{route('client.recherche')}}">
 
                 @csrf
                 <div class="form-row">
+
                     <div class="col-md-4 mb-3">
+
                         <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom du client">
                     </div>
                     <div class="col-md-4 mb-3">
@@ -30,132 +36,44 @@
         </div>
 
        {{--  --}}
-       <div class="container">
-        <div class="hp-room-items">
-           
-            <div class="row">
-                @foreach ($clients as $client)
-                    <div class="col-md-3 mb-4">
-                        <table class="table table-bordered table-hover">
-                            <tbody>
-                                <tr>
-                                    <th colspan="2" class="text-center">{{ $client->nom }}</th>
-                                </tr>
-                                <tr>
-                                    <th>Nationalité:</th>
-                                    <td>{{ $client->pays }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Téléphone:</th>
-                                    <td>{{ $client->telephone }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Hôtel:</th>
-                                    <td>
-                                        <a href="#" class="hotel-info" data-nom="{{ $client->hotel->nom }}"
-                                            data-description="{{ $client->hotel->description }}">{{ $client->hotel->nom }}</a>
-                                    </td>
-                                </tr>
+        <div class="container">
 
-                                <tr>
-                                    <td colspan="2" class="text-center">
-                                        <a href="#" class="client-photo-link" data-toggle="modal"
-                                            data-target="#clientModal">
-                                            {{-- <img src="{{ $client->photo }}" class="client-photo"> --}}
-                                            {{-- <img src="avatar5.png" class="card-img-top client-photo" alt="{{ $client->nom }}"> --}}
-                                            <img src="{{ asset('images/' . $client->photo) }}"
-                                                class="card-img-top client-photo" alt="{{ $client->nom }}">
-
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                @endforeach
-            </div>
-
-            <!-- Modal -->
-            <div class="modal fade" id="hotelModal" tabindex="-1" role="dialog" aria-labelledby="hotelModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="hotelModalLabel">Informations sur l'hôtel</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+            <div class="hp-room-items">
+                <div class="row">
+                    @foreach($clients as $client)
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="card">
+                                <img src="{{ asset('images/' . $client->photo) }}"
+                                class="card-img-top client-photo" alt="{{ $client->nom }}">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center"><b>{{ $client->nom }}</b></h5>
+                                    <p class="card-text" style="font-size: 13px;"><span class="badge badge-warning">Signalé le : {{ \Carbon\Carbon::parse($client->created_at)->format('j/m/Y') }}</span></p>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"><strong>Nationalité:</strong> {{ $client->pays }}</li>
+                                        <li class="list-group-item"><strong>Téléphone:</strong> {{ $client->telephone }}</li>
+                                        <li class="list-group-item"><strong>Hôtel:</strong> {{ $client->hotel->nom }}</li>
+                                    </ul>
+                                    <a href="{{ route('client.show', $client->id) }}" class="btn btn-primary btn-block">Voir Détails</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="modal-body" id="hotelInfo">
-                            <!-- Les informations sur l'hôtel seront affichées ici -->
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
-            </div>
-
-            <!-- Modal -->
-            <div class="modal fade" id="clientModal" tabindex="-1" role="dialog"
-                aria-labelledby="clientModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <img src="" id="modalClientPhoto" class="img-fluid">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <style>
-                .client-photo {
-                    width: 100px;
-                    /* ajustez cette valeur selon vos besoins */
-                    height: 50px;
-                    /* ajustez cette valeur selon vos besoins */
-                    object-fit: cover;
-                    /* pour conserver le rapport d'aspect de l'image */
-                    transition: transform 0.3s ease;
-                    /* Transition pour l'effet d'agrandissement */
-
-                }
-
-
-                .client-photo:hover {
-
-                    transform: scale(1.2);
-                    /* Agrandissement de la photo au survol */
-                }
-
-                .img-fluid {
-                    width: 576px;
-                    /* ajustez cette valeur selon vos besoins */
-                    height: 279px;
-                    /* ajustez cette valeur selon vos besoins */
-                    object-fit: cover;
-                    /* pour conserver le rapport d'aspect de l'image */
-
-                }
-                /* POUR VOIR TOUT LES SIGNALEMENTS */
-                .centered-link {
-                    display: block;
-                    margin: 0 auto;
-                    text-align: center; /* Centrer le texte à l'intérieur de l'ancre */
-                    text-decoration: underline; /* Ajouter un soulignement */
-                    text-decoration-color: #dfa974; /* Couleur du soulignement */
-
-
-                }
                 
-
-            </style>
-
+            </div>
+         
         </div>
-    </div>
 
        {{--  --}}
 
-        <br>
+        
         {{-- LA PAGINATION --}}
-        <nav aria-label="Page navigation" class="mb-3">
+        <div style="display: flex; justify-content: center;" class="mb-3 mt-3">
+            {{$clients->links()}}
+        </div>
+        
+        
+        {{-- <nav aria-label="Page navigation" class="mb-3">
             <ul class="pagination justify-content-center">
                 @if ($clients->onFirstPage())
                     <li class="page-item disabled">
@@ -179,76 +97,17 @@
                     </li>
                 @endif
             </ul>
-        </nav>
+        </nav> --}}
     </div>
 </section>
-
-
-
-    {{-- js pour les info de l'hotel --}}
-<script>
-    $(document).ready(function() {
-        // Fonction pour afficher le modal lorsque survolé
-        function showHotelModal(nom, description) {
-            // Construire le contenu du modal
-            var modalContent = '<p>Nom: ' + nom + '</p>';
-            modalContent += '<p>Description: ' + description + '</p>';
-            // Ajouter d'autres informations selon vos besoins
-
-            // Injecter le contenu dans le modal
-            $('#hotelInfo').html(modalContent);
-
-            // Afficher le modal
-            $('#hotelModal').modal('show');
+    {{-- CSS pour donner une card fixe a mes images --}}
+    <style>
+        .client-photo {
+        width: 500px;
+        height: 200px;
+        object-fit: cover;
         }
 
-        // Au survol du lien
-        $('.hotel-info').mouseenter(function() {
-            // Récupérer les informations de l'hôtel
-            var nom = $(this).data('nom');
-            var description = $(this).data('description');
-
-            // Afficher le modal
-            showHotelModal(nom, description);
-        });
-
-        // Lorsque le curseur quitte le contenu du modal
-        $('#hotelInfo').mouseleave(function() {
-            // Masquer le modal
-            $('#hotelModal').modal('hide');
-        });
-    });
-</script>
-
-{{--  le js pour la photo --}}
-<script>
-    $(document).ready(function() {
-        // Au survol de la photo
-        $('.client-photo').mouseenter(function() {
-            var src = $(this).attr('src');
-            $('#modalClientPhoto').attr('src', src);
-            $('#clientModal').modal('show');
-        });
-
-        // Lorsque le curseur quitte la photo
-        $('.client-photo-link').mouseleave(function() {
-            $('#clientModal').modal('hide');
-        });
-        // Lorsque le curseur quitte le modal de la photo
-        $('#clientModal').mouseleave(function() {
-            $('#clientModal').modal('hide');
-        });
-    });
-</script>
-
-<script>
-    $(document).ready(function() {
-        $('.accordion-header').click(function() {
-            $(this).toggleClass('active').next().slideToggle('fast');
-            $('.accordion-header').not(this).removeClass('active').next().slideUp('fast');
-        });
-    });
-</script>
-
+    </style>
 
 @endsection
